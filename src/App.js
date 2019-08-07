@@ -1,48 +1,53 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import Car from './Car/Car'
 
 class App extends Component {
 
-  state = {
-    cars: [
-      {
-        name: 'Mazda CX-9',
-        year: 2018
-      },
-      {
-        name: 'Audi Q8',
-        year: 2019
-      },
-      {
-        name: 'BMW X6',
-        year: 2019
+  constructor(props){
+    console.log('App constructor');
+    super(props);
+
+    this.state = {
+        cars: [
+          { name: 'Mazda CX-9', year: 2018},
+          { name: 'Audi Q8', year: 2019},
+          { name: 'BMW X6', year: 2019}
+        ],
+        pageTitle: 'React components',
+        showCars: false
       }
-    ],
-    pageTitle: 'React components',
-    showCars: false
+
   }
 
   onChangeName(name, index) {
     const car = this.state.cars[index]
     car.name = name
-    // const cars = this.state.cars.concat()
+
     const cars = [...this.state.cars]
     cars[index] = car
     this.setState({
-      // cars: cars
+
       cars
     })
   }
 
   deleteHandler(index){
-    // console.log('Delete')
+
     const cars = this.state.cars.concat()
 
     cars.splice(index, 1)
 
     this.setState({cars})
-    // this.setState({pageTitle: 'Deleted'})
+
+  }
+
+  componentWillMount(){
+    console.log('App componentWillMount');
+  }
+
+  componentDidMount(){
+    console.log('App componentDidMount');
   }
 
   handleInput = (event) => {
@@ -58,6 +63,7 @@ class App extends Component {
   }
 
   render(){
+    console.log('App render');
     const divStyle = {
       textAlign: 'center'
     }
@@ -83,8 +89,8 @@ class App extends Component {
     return (
       <div style={divStyle}>
         <h1>{this.state.pageTitle}</h1>
-
-        <button 
+        {/* <h1>{this.props.title}</h1> */}
+        <button className={'AppButton'}
           onClick={this.toggleCarsHandler}
         >Toggle cars</button>
 
